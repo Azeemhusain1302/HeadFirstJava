@@ -1,0 +1,103 @@
+//CalenderTest Problem
+
+import java.util.Calendar;
+
+public class CalendarTest {
+
+    public static void main(String[] args) {
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2004, 0, 7, 15, 40);
+        System.out.println("Date: " + calendar.getTime());
+
+        long time = calendar.getTimeInMillis();
+        time += 1000 * 60 * 60;
+
+        calendar.setTimeInMillis(time);
+        System.out.println("Date Plus 1 Hour: " + calendar.getTime());
+
+        calendar.add(calendar.DATE, 35);
+        System.out.println("Date Plus 35 Days: " + calendar.getTime());
+
+        calendar.roll(calendar.DATE, 35);
+        System.out.println("Date Rolled 35 Days: " + calendar.getTime());
+
+        calendar.set(calendar.DATE, 1);
+        System.out.println("Date Set to the 1st: " + calendar.getTime());
+    }
+}
+
+// Test Date Formatting Problem
+import java.util.Date;
+
+public class TestDateFormatting {
+
+    public static void main(String[] args) {
+
+        String stringOne = String.format("%tc", new Date());
+        System.out.println(stringOne);
+
+        String stringTwo = String.format("%tr", new Date());
+        System.out.println(stringTwo);
+
+        Date today = new Date();
+
+        String stringThree = String.format("%tA, %tB %td", today, today, today);
+        System.out.println(stringThree);
+
+        String stringFour = String.format("%tA, %<tB %<td", today);
+        System.out.println(stringFour);
+    }
+}
+
+//MathsTestDrive
+
+public class MathTestDrive {
+
+    public static void main(String[] args) {
+
+        // Random
+        double randomDouble = Math.random();
+        int randomInteger = (int) (Math.random() + 5);
+        System.out.println("Random Double: " + randomDouble);
+        System.out.println("Random Integer: " + randomInteger);
+
+        // Absolute
+        int absoluteInteger = Math.abs(-240);
+        double absoluteDouble = Math.abs(240.45);
+        System.out.println("Absolute Integer: " + absoluteInteger);
+        System.out.println("Absolute Double: " + absoluteDouble);
+
+        // Round
+        int roundedIntegerOne = Math.round(-24.8f);
+        int roundedIntegerTwo = Math.round(24.45f);
+        System.out.println("Rounded Integer One: " + roundedIntegerOne);
+        System.out.println("Rounded Integer Two: " + roundedIntegerTwo);
+
+        // Minimum
+        int minimumInteger = Math.min(24, 240);
+        double minimumDouble = Math.min(90876.5, 90876.49);
+        System.out.println("Minimum Integer: " + minimumInteger);
+        System.out.println("Minimum Double: " + minimumDouble);
+
+        // Maximum
+        int maximumInteger = Math.max(24, 240);
+        double maximumDouble = Math.max(90876.5, 90876.49);
+        System.out.println("Maximum Integer: " + maximumInteger);
+        System.out.println("Maximum Double: " + maximumDouble);
+    }
+}
+//String Solution
+
+public class StringConversion {
+
+    public static void main(String[] args) {
+
+        double doubleOne = 42.5;
+        String doubleOneString = "" + doubleOne;
+        System.out.println(doubleOneString);
+
+        String doubleTwoString = Double.toString(doubleOne);
+        System.out.println(doubleTwoString);
+    }
+}
