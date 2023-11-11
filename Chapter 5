@@ -1,0 +1,140 @@
+//Mix for five solution
+
+public class MixForFive {
+
+    public static void main(String[] args) {
+        int x = 0;
+        int y = 30;
+
+        for (int outer = 0; outer < 3; outer++) {
+
+            for (int inner = 4; inner > 1; inner--) {
+
+                x = x + 3;
+                y = y - 2;
+
+                if (x == 6) {
+                    break;
+                }
+
+                x = x + 3;
+            }
+
+            y = y - 2;
+        }
+
+        System.out.println(x + " " + y);
+    }
+}
+
+//MultiFor problem solution 
+
+public class MultiFor {
+
+    public static void main(String[] args) {
+
+        for (int x = 0; x < 4; x++) {
+
+            for (int y = 4; y > 2; y--) {
+                System.out.println(x + " " + y);
+            }
+
+            if (x == 1) {
+                x++;
+            }
+        }
+    }
+}
+
+//SimpleDotGame solution 
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class GameHelper {
+
+    public String getUserInput(String prompt) {
+        String inputLine = null;
+        System.out.print(prompt + " ");
+
+        try {
+            BufferedReader inputStream = new BufferedReader(new InputStreamReader(System.in));
+            inputLine = inputStream.readLine();
+            if (inputLine.length() == 0) return null;
+        } catch (IOException e) {
+            System.out.println("IOException: " + e);
+        }
+
+        return inputLine;
+    }
+}
+// SimpleDotGame
+public class SimpleDotCom {
+
+    int[] locationCells;
+    int numberOfHits = 0;
+
+    public void setLocationCells(int[] locations) {
+        locationCells = locations;
+    }
+
+    public String checkYourself(String stringGuess) {
+        int guess = Integer.parseInt(stringGuess);
+        String result = "miss";
+
+        for (int cell : locationCells) {
+            if (guess == cell) {
+                result = "hit";
+                numberOfHits++;
+                break;
+            }
+        }
+
+        if (numberOfHits == locationCells.length) {
+            result = "kill";
+        }
+
+        System.out.println(result);
+        return result;
+    }
+}
+
+//Simple Dot Com Game 
+
+public class SimpleDotComGame {
+
+    public static void main(String[] args) {
+
+        int numberOfGuesses = 0;
+        GameHelper gameHelper = new GameHelper();
+        SimpleDotCom simpleDotCom = new SimpleDotCom();
+        int randomNumber = (int) (Math.random() * 5);
+        int[] locations = {randomNumber, randomNumber + 1, randomNumber + 2};
+        simpleDotCom.setLocationCells(locations);
+        boolean isAlive = true;
+
+        while (isAlive == true) {
+            String guess = gameHelper.getUserInput("Enter a number: ");
+            String result = simpleDotCom.checkYourself(guess);
+            numberOfGuesses++;
+
+            if (result.equals("kill")) {
+                isAlive = false;
+                System.out.print("You took " + numberOfGuesses + " guesses");
+            }
+        }
+    }
+
+//Simple Dot Com Test Drive
+
+public class SimpleDotComTestDrive {
+
+    public static void main(String[] args) {
+        SimpleDotCom simpleDotCom = new SimpleDotCom();
+        int[] locations = {2, 3, 4};
+        simpleDotCom.setLocationCells(locations);
+        String userGuess = "2";
+        String result = simpleDotCom.checkYourself(userGuess);
+    }
+}
