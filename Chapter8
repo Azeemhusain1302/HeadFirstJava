@@ -1,0 +1,72 @@
+// Animal Solution
+
+public class Animal {
+
+}
+
+//AnimalTestDrive
+
+public class AnimalTestDrive {
+
+    public static void main(String[] args) {
+
+        MyAnimalList list = new MyAnimalList();
+        Dog dog = new Dog();
+        Cat cat = new Cat();
+        list.add(dog);
+        list.add(cat);
+
+        System.out.println("Is Dog equal to Cat? " + dog.equals(cat));
+
+        System.out.println("The hashCode of Dog is: " + cat.hashCode());
+
+        System.out.println("The getClass of Cat is: " + cat.getClass());
+
+        System.out.println("The toString of Dog is: " + dog.toString());
+    }
+}
+
+// CatExtends Solution
+
+public class Cat extends Animal {
+
+}
+
+//DotExtends Solution
+
+public class Dog extends Animal {
+
+}
+//MyAnimal Solution
+
+public class MyAnimalList {
+
+    private Animal[] animals = new Animal[5];
+    private int nextIndex = 0;
+
+    public void add(Animal animal) {
+
+        if (nextIndex < animals.length) {
+            animals[nextIndex] = animal;
+            System.out.println("Animal added at: " + nextIndex);
+            nextIndex++;
+        }
+    }
+}
+
+//MyDostList Solution
+
+public class MyDogList {
+
+    private Dog[] dogs = new Dog[5];
+    private int nextIndex = 0;
+
+    public void add(Dog d) {
+
+        if (nextIndex < dogs.length) {
+            dogs[nextIndex] = d;
+            System.out.println("Dog added at: " + nextIndex);
+            nextIndex++;
+        }
+    }
+}
