@@ -1,0 +1,52 @@
+// Boat Problem
+
+public class Boat {
+
+    private int length;
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int len) {
+        length = len;
+    }
+
+    public void move() {
+        System.out.print("Drift! ");
+    }
+}
+//RowBoat Solution
+
+public class RowBoat extends Boat {
+
+    public void rowTheBoat() {
+        System.out.print("Stroke Natasha! ");
+    }
+}
+//SailBoat
+
+public class SailBoat extends Boat {
+
+    @Override
+    public void move() {
+        System.out.print("Hoist Sail! ");
+    }
+}
+
+//TestBoat Solution
+
+public class TestBoats {
+
+    public static void main(String[] args) {
+
+        Boat boat = new Boat();
+        SailBoat sailBoat = new SailBoat();
+        RowBoat rowBoat = new RowBoat();
+
+        sailBoat.setLength(32);
+        boat.move();
+        rowBoat.move();
+        sailBoat.move();
+    }
+}
