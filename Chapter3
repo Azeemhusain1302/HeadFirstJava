@@ -1,0 +1,101 @@
+//Books Question Solution
+
+public class Books {
+
+    String title;
+    String author;
+}
+
+//BookTestDriveSolution
+
+package com.headfirstjava.chapterthree.books;
+
+public class BooksTestDrive {
+
+    public static void main(String[] args) {
+
+        Books[] myBooks = new Books[3];
+        int x = 0;
+        myBooks[0] = new Books();
+        myBooks[1] = new Books();
+        myBooks[2] = new Books();
+        myBooks[0].title = "The Grapes of Java";
+        myBooks[1].title = "The Java Gatsby";
+        myBooks[2].title = "The Java Cookbook";
+        myBooks[0].author = "Bob";
+        myBooks[1].author = "Sue";
+        myBooks[2].author = "Ian";
+
+        while (x < 3) {
+            System.out.print(myBooks[x].title);
+            System.out.print(" by ");
+            System.out.println(myBooks[x].author);
+            x = x + 1;
+        }
+    }
+}
+
+//TestArrays Solution
+
+public class TestArrays {
+
+    public static void main(String[] args) {
+
+        String[] islands = new String[4];
+        islands[0] = "Bermuda";
+        islands[1] = "Fiji";
+        islands[2] = "Azores";
+        islands[3] = "Cozumel";
+
+        int[] index = new int[4];
+        index[0] = 1;
+        index[1] = 3;
+        index[2] = 0;
+        index[3] = 2;
+
+        int y = 0;
+        int ref;
+
+        while (y < 4) {
+            ref = index[y];
+            System.out.print("islands = ");
+            System.out.println(islands[ref]);
+            y = y + 1;
+        }
+    }
+}
+
+//Triangle Solution
+
+public class Triangle {
+
+    double area;
+    int height;
+    int length;
+
+    public static void main(String[] args) {
+        int x = 0;
+        Triangle[] triangleArray = new Triangle[4];
+
+        while (x < 4) { //
+            triangleArray[x] = new Triangle();//
+            triangleArray[x].height = (x + 1) * 2; //
+            triangleArray[x].length = x + 4; //
+            triangleArray[x].setArea();//
+            System.out.print("triangle " + x + ", area");
+            System.out.println(" = " + triangleArray[x].area); //
+            x = x + 1; //
+        }
+
+        int y = x;
+        x = 27;
+        Triangle t5 = triangleArray[2];
+        triangleArray[2].area = 343;
+        System.out.print("y = " + y);
+        System.out.println(", t5 area = " + t5.area);
+    }
+
+    void setArea() {
+        area = (height * length) / 2; //
+    }
+}
