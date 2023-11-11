@@ -1,0 +1,140 @@
+// DogGame solution
+
+public class Dog {
+
+    int size;
+    String breed;
+    String name;
+
+    void bark() {
+        System.out.println("Ruff Ruff!");
+    }
+}
+
+//DogTestDrive
+
+public class DogTestDrive {
+
+    public static void main(String[] args) {
+
+        Dog dog = new Dog();
+        dog.size = 40;
+        dog.bark();
+    }
+}
+
+//GuessGame 
+
+public class GameLauncher {
+
+    public static void main(String[] args) {
+
+        GuessGame guessGame = new GuessGame();
+        guessGame.startGame();
+    }
+}
+
+//GuessGame 
+
+public class GuessGame {
+
+    Player playerOne;
+    Player playerTwo;
+    Player playerThree;
+
+    public void startGame() {
+        playerOne = new Player();
+        playerTwo = new Player();
+        playerThree = new Player();
+
+        int playerOneGuess = 0;
+        int playerTwoGuess = 0;
+        int playerThreeGuess = 0;
+
+        boolean playerOneIsRight = false;
+        boolean playerTwoIsRight = false;
+        boolean playerThreeIsRight = false;
+
+        int targetNumber = (int) (Math.random() * 10);
+        System.out.println("I'm thinking of a numberGuessed between 0 and 9...");
+
+        while (true) {
+            System.out.println("Number to guess is... " + targetNumber);
+
+            playerOne.guess();
+            playerTwo.guess();
+            playerThree.guess();
+
+            playerOneGuess = playerOne.numberGuessed;
+            System.out.println("Player one guessed... " + playerOneGuess);
+
+            playerTwoGuess = playerTwo.numberGuessed;
+            System.out.println("Player two guessed... " + playerTwoGuess);
+
+            playerThreeGuess = playerThree.numberGuessed;
+            System.out.println("Player three guessed... " + playerThreeGuess);
+
+            if (playerOneGuess == targetNumber) {
+                playerOneIsRight = true;
+            }
+
+            if (playerTwoGuess == targetNumber) {
+                playerTwoIsRight = true;
+            }
+
+            if (playerThreeGuess == targetNumber) {
+                playerThreeIsRight = true;
+            }
+
+            if (playerOneIsRight || playerTwoIsRight || playerThreeIsRight) {
+                System.out.println("We have a winner!");
+                System.out.println("Player one got it right? " + playerOneIsRight);
+                System.out.println("Player two got it right? " + playerTwoIsRight);
+                System.out.println("Player three got it right? " + playerThreeIsRight);
+                System.out.println("Game is over!");
+                break;
+            } else {
+                System.out.println("Players will have to try again...");
+            }
+        }
+    }
+}
+
+//Movie game solution 
+
+public class Movie {
+
+    String title;
+    String genre;
+    int rating;
+
+    void playIt() {
+        System.out.println("Playing the movie...");
+    }
+}
+
+//MovieTestDrive
+
+package com.headfirstjava.chaptertwo.movie;
+
+public class MovieTestDrive {
+
+    public static void main(String[] args) {
+
+        Movie movieOne = new Movie();
+        movieOne.title = "Gone with the Stock";
+        movieOne.genre = "Tragic";
+        movieOne.rating = -2;
+
+        Movie movieTwo = new Movie();
+        movieTwo.title = "Lost in Cubicle Space";
+        movieTwo.genre = "Comedy";
+        movieTwo.rating = 5;
+        movieTwo.playIt();
+
+        Movie movieThree = new Movie();
+        movieThree.title = "Byte Club";
+        movieThree.genre = "Tragic but ultimately uplifting";
+        movieThree.rating = 127;
+    }
+}
