@@ -1,0 +1,67 @@
+//Duck Probelem Solution
+
+public class Duck {
+
+    int size;
+
+    public Duck() {
+        System.out.println("Quack!");
+        this.size = 10;
+        System.out.println("Size is: " + size);
+    }
+
+    public Duck(int size) {
+        System.out.println("Quack!");
+        this.size = size;
+        System.out.println("Size is: " + size);
+    }
+}
+
+//Make Duck Solution
+
+public class MakeDuck {
+
+    public static void main(String[] args) {
+
+        Duck defaultDuck = new Duck();
+        Duck customDuck = new Duck(31);
+    }
+}
+
+//Hippo Problem
+
+public abstract class Animal {
+
+    private String name;
+
+    public Animal(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+//Hippo extends
+
+public class Hippo extends Animal {
+
+    public Hippo(String name) {
+        super(name);
+    }
+}
+//MakeHippo
+
+public class MakeHippo {
+
+    public static void main(String[] args) {
+
+        Hippo hippo = new Hippo("Buffy!");
+        System.out.print(hippo.getName());
+    }
+}
