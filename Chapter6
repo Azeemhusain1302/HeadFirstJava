@@ -1,0 +1,243 @@
+// arrayListMagent
+
+import java.util.ArrayList;
+
+public class ArrayListMagnet {
+
+    public static void main(String[] args) {
+        ArrayList<String> arrayList = new ArrayList<>();
+        arrayList.add(0, "zero");
+        arrayList.add(1, "one");
+        arrayList.add(2, "two");
+        arrayList.add(3, "three");
+        printArrayList(arrayList);
+
+        arrayList.remove(2);
+        if (arrayList.contains("three")) arrayList.add("four");
+        printArrayList(arrayList);
+
+        if (arrayList.indexOf("four") != 4) arrayList.add(4, "4.2");
+        printArrayList(arrayList);
+
+        if (arrayList.contains("two")) arrayList.add("2.2");
+        printArrayList(arrayList);
+    }
+
+    public static void printArrayList(ArrayList<String> arrayList) {
+        for (String element : arrayList) {
+            System.out.print(element + " ");
+        }
+
+        System.out.println();
+    }
+}
+
+//DotComGame
+
+import java.util.ArrayList;
+
+public class DotCom {
+
+    private String name;
+    private ArrayList<String> locationCells;
+
+    public String checkYourself(String userInput) {
+        String result = "Miss!";
+        int index = locationCells.indexOf(userInput);
+
+        if (index >= 0) {
+            locationCells.remove(index);
+
+            if (locationCells.isEmpty()) {
+                result = "Kill!";
+                System.out.println("Ouch! You sunk " + name + " :(");
+            } else {
+                result = "Hit!";
+            }
+        }
+
+        return result;
+    }
+
+    public ArrayList<String> getLocationCells() {
+        return locationCells;
+    }
+
+    public void setLocationCells(ArrayList<String> locationCells) {
+        this.locationCells = locationCells;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+//DotComGame Solution
+
+import java.util.ArrayList;
+
+public class DotComBust {
+
+    private GameHelper gameHelper = new GameHelper();
+    private ArrayList<DotCom> dotComArrayList = new ArrayList<>();
+    private int numberOfGuesses = 0;
+
+    public static void main(String[] args) {
+        DotComBust dotComBustGame = new DotComBust();
+        dotComBustGame.setUpGame();
+        dotComBustGame.startPlaying();
+    }
+
+    private void setUpGame() {
+        DotCom dotComOne = new DotCom();
+        dotComOne.setName("Pets.com");
+        DotCom dotComTwo = new DotCom();
+        dotComTwo.setName("eToys.com");
+        DotCom dotComThree = new DotCom();
+        dotComThree.setName("Go2.com");
+        dotComArrayList.add(dotComOne);
+        dotComArrayList.add(dotComTwo);
+        dotComArrayList.add(dotComThree);
+
+        System.out.println("Your goal is to sink three Dot Coms!");
+        System.out.println(dotComOne.getName() + ", " + dotComTwo.getName() + ", " + dotComThree.getName());
+        System.out.println("Try and sink them all in the fewest number of guesses!");
+
+        for (DotCom dotComToSet : dotComArrayList) {
+            ArrayList<String> newLocation = gameHelper.placeDotCom(3);
+            dotComToSet.setLocationCells(newLocation);
+        }
+    }
+
+    private void startPlaying() {
+        while (!dotComArrayList.isEmpty()) {
+            String userGuess = gameHelper.getUserInput("Enter a guess: ");
+            checkUserGuess(userGuess);
+        }
+
+        finishGame();
+    }
+
+    private void checkUserGuess(String userGuess) {
+        numberOfGuesses++;
+        String result = "Miss!";
+
+        for (DotCom dotComToTest : dotComArrayList) {
+            result = dotComToTest.checkYourself(userGuess);
+
+            if (result.equals("Hit!")) break;
+
+            if (result.equals("Kill!")) {
+                dotComArrayList.remove(dotComToTest);
+                break;
+            }
+        }
+
+        System.out.println(result);
+    }
+
+    private void finishGame() {
+        System.out.println("All Dot Coms are dead! Your stock is now worthless.");
+
+        if (numberOfGuesses <= 18) {
+            System.out.println("It only took you " + numberOfGuesses + " guesses.");
+            System.out.println("You got out before your options sank.");
+        } else {
+            System.out.println("Took you long enough. " + numberOfGuesses + " guesses.");
+            System.out.println("Fish are dancing with your options.");
+        }
+    }
+}
+
+//GameHelper
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+public class GameHelper {
+
+    private static final String alphabet = "abcdefg";
+    private int gridLength = 7;
+    private int gridSize = 49;
+    private int[] grid = new int[gridSize];
+    private int comCount = 0;
+
+    public String getUserInput(String prompt) {
+        String inputLine = null;
+        System.out.print(prompt + " ");
+
+        try {
+            BufferedReader inputStream = new BufferedReader(new InputStreamReader(System.in));
+            inputLine = inputStream.readLine();
+
+            if (inputLine.length() == 0) return null;
+        } catch (IOException e) {
+            System.out.println("IOException: " + e);
+        }
+
+        return inputLine.toLowerCase();
+    }
+
+    public ArrayList<String> placeDotCom(int dotComSize) {
+        ArrayList<String> alphaCells = new ArrayList<>();
+        String[] alphaCoords = new String[dotComSize];
+        String temp = null;
+        int[] coords = new int[dotComSize];
+        int attempts = 0;
+        boolean success = false;
+        int location = 0;
+
+        comCount++;
+        int inc = 1;
+
+        if ((comCount % 2) == 1) {
+            inc = gridLength;
+        }
+
+        while (!success && attempts++ < 200) {
+            location = (int) (Math.random() * gridSize);
+            int x = 0;
+            success = true;
+
+            while (success && x < dotComSize) {
+
+                if (grid[location] == 0) {
+                    coords[x++] = location;
+                    location += inc;
+
+                    if (location >= gridSize) {
+                        success = false;
+                    }
+
+                    if (x > 0 && (location % gridLength == 0)) {
+                        success = false;
+                    }
+                } else {
+                    success = false;
+                }
+            }
+        }
+
+        int x = 0;
+        int row = 0;
+        int column = 0;
+
+        while (x < dotComSize) {
+            grid[coords[x]] = 1;
+            row = (int) (coords[x] / gridLength);
+            column = coords[x] % gridLength;
+            temp = String.valueOf(alphabet.charAt(column));
+
+            alphaCells.add(temp.concat(Integer.toString(row)));
+            x++;
+        }
+
+        return alphaCells;
+    }
+}
